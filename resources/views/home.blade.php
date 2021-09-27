@@ -1,7 +1,7 @@
 @extends('layers.app')
 
 @section('body')
-<div class="bg-red-700">
+<div class="">
     TEST
 </div>
 @endsection
