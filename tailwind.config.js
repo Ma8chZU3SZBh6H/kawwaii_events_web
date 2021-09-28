@@ -15,6 +15,7 @@ module.exports = {
                 lightTitle: "#F0F0F0",
                 lightText: "#E6E6E6",
                 bg: "#FCFCFC",
+                bgTrans: "#6D6D6D",
             },
             gridTemplateColumns: {
                 navExpanded: "auto 1fr",
@@ -23,7 +24,11 @@ module.exports = {
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            blur: ["hover", "focus"],
+            zIndex: ["hover", "active"],
+            fontWeight: ["hover", "focus"],
+        },
     },
     plugins: [],
 };
