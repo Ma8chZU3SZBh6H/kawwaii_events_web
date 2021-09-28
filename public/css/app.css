@@ -10217,6 +10217,14 @@ video {
   grid-template-columns: none;
 }
 
+.grid-cols-navExpanded {
+  grid-template-columns: auto 1fr;
+}
+
+.grid-cols-test {
+  grid-template-columns: 200px minmax(900px, 1fr) 100px;
+}
+
 .grid-rows-1 {
   grid-template-rows: repeat(1, minmax(0, 1fr));
 }
@@ -42336,6 +42344,14 @@ video {
     grid-template-columns: none;
   }
 
+  .sm\:grid-cols-navExpanded {
+    grid-template-columns: auto 1fr;
+  }
+
+  .sm\:grid-cols-test {
+    grid-template-columns: 200px minmax(900px, 1fr) 100px;
+  }
+
   .sm\:grid-rows-1 {
     grid-template-rows: repeat(1, minmax(0, 1fr));
   }
@@ -74441,6 +74457,14 @@ video {
 
   .md\:grid-cols-none {
     grid-template-columns: none;
+  }
+
+  .md\:grid-cols-navExpanded {
+    grid-template-columns: auto 1fr;
+  }
+
+  .md\:grid-cols-test {
+    grid-template-columns: 200px minmax(900px, 1fr) 100px;
   }
 
   .md\:grid-rows-1 {
@@ -106550,6 +106574,14 @@ video {
     grid-template-columns: none;
   }
 
+  .lg\:grid-cols-navExpanded {
+    grid-template-columns: auto 1fr;
+  }
+
+  .lg\:grid-cols-test {
+    grid-template-columns: 200px minmax(900px, 1fr) 100px;
+  }
+
   .lg\:grid-rows-1 {
     grid-template-rows: repeat(1, minmax(0, 1fr));
   }
@@ -138657,6 +138689,14 @@ video {
     grid-template-columns: none;
   }
 
+  .xl\:grid-cols-navExpanded {
+    grid-template-columns: auto 1fr;
+  }
+
+  .xl\:grid-cols-test {
+    grid-template-columns: 200px minmax(900px, 1fr) 100px;
+  }
+
   .xl\:grid-rows-1 {
     grid-template-rows: repeat(1, minmax(0, 1fr));
   }
@@ -170762,6 +170802,14 @@ video {
 
   .\32xl\:grid-cols-none {
     grid-template-columns: none;
+  }
+
+  .\32xl\:grid-cols-navExpanded {
+    grid-template-columns: auto 1fr;
+  }
+
+  .\32xl\:grid-cols-test {
+    grid-template-columns: 200px minmax(900px, 1fr) 100px;
   }
 
   .\32xl\:grid-rows-1 {

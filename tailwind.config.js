@@ -16,6 +16,10 @@ module.exports = {
                 lightText: "#E6E6E6",
                 bg: "#FCFCFC",
             },
+            gridTemplateColumns: {
+                navExpanded: "auto 1fr",
+                test: "200px minmax(900px, 1fr) 100px",
+            },
         },
     },
     variants: {
