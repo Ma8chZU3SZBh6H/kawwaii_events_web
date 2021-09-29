@@ -17,8 +17,17 @@
                 <a class="text-text text-lg" href="">Dashboard</a>
             </div>
             <div class="flex flex-col md:gap-3 md:flex-row">
-                <a class="text-text text-lg" href="">Login</a>
+                @auth()
+                <a class="text-text text-lg" href="{{route('profile')}}">{{Auth()->User()->name}}</a>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <input class="bg-transparent text-text text-lg cursor-pointer" type="submit" value="Logout">
+                </form>
+                @endauth
+                @guest()
+                <a class="text-text text-lg" href="{{route('login')}}">Login</a>
                 <a class="text-text text-lg" href="{{route('register')}}">Register</a>
+                @endguest
             </div>
         </div>
     </div>

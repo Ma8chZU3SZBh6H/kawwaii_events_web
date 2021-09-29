@@ -33,7 +33,7 @@ class RegisterController extends Controller
         //md5(json_encode([$request->name, $request->email, $request->password, env('APP_KEY')]))
         //dd();
 
-        $this->validate($request, [
+        $request->validate([
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', 'max:255']
