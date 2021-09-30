@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Mail\RegistrationMail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//dd((new Carbon('2022/02/05'))->diffForHumans(['short' => true]));
 
 Route::get('/email', function () {
     return new RegistrationMail("test", "test");
@@ -33,3 +39,16 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/register/{data}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/event/add', [EventController::class, 'index'])->name('event');
+Route::post('/event/add', [EventController::class, 'store']);
+Route::get('/event/edit/{event}', [EventController::class, 'edit_get'])->name('event.edit');
+Route::post('/event/edit/{event}', [EventController::class, 'edit_post']);
+Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
+Route::get('/event/{event}', [EventController::class, 'select'])->name('event.select');
+
+Route::post('/join/guest/{event}', [JoinController::class, 'join_guest_send'])->name('join.guest');
+Route::post('/join/event/{event}', [JoinController::class, 'join_auth_store'])->name('join.auth.accept');
+Route::get('/join/guest/accept/{data}', [JoinController::class, 'join_guest_store'])->name('join.guest.accept');

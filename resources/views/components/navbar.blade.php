@@ -14,19 +14,21 @@
         </div>
         <div id="nav_items" class="md:flex justify-between items-center overflow-hidden transition-all md:max-h-full md:transition-none">
             <div>
-                <a class="text-text text-lg" href="">Dashboard</a>
+                @auth()
+                <a class="text-text text-lg hover:underline" href="{{route('dashboard')}}">Dashboard</a>
+                @endauth
             </div>
             <div class="flex flex-col md:gap-3 md:flex-row">
                 @auth()
-                <a class="text-text text-lg" href="{{route('profile')}}">{{Auth()->User()->name}}</a>
+                <a class="text-text text-lg hover:underline" href="{{route('profile')}}">{{Auth()->User()->name}}</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
-                    <input class="bg-transparent text-text text-lg cursor-pointer" type="submit" value="Logout">
+                    <input class="bg-transparent text-text text-lg cursor-pointer hover:underline" type="submit" value="Logout">
                 </form>
                 @endauth
                 @guest()
-                <a class="text-text text-lg" href="{{route('login')}}">Login</a>
-                <a class="text-text text-lg" href="{{route('register')}}">Register</a>
+                <a class="text-text text-lg hover:underline" href="{{route('login')}}">Login</a>
+                <a class="text-text text-lg hover:underline" href="{{route('register')}}">Register</a>
                 @endguest
             </div>
         </div>

@@ -2,19 +2,20 @@
 
 @section('body')
 <div class="">
-    <div class="md:flex justify-between">
+    <div class="md:flex justify-between mb-6">
         <p class="text-title font-medium text-lg">Events</p>
-        <div class="flex mb-6">
+        <div class="flex ">
             <p class="text-text text-lg">Sort By:</p>
-            <select class="text-text" name="" id="">
+            <select class="text-text cursor-pointer hover:underline" name="" id="">
                 <option value="">Views</option>
                 <option value="">Date</option>
             </select>
         </div>
     </div>
-    <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-        <x-event-card />
-        <x-event-card />
-    </div>
+    @if ($events[0] == null)
+    <div class="text-text font-medium">No events found.</div>
+    @else
+    <x-event-card-list :events="$events" />
+    @endif
 </div>
 @endsection

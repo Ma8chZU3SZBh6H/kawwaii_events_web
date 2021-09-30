@@ -25,14 +25,6 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->data != null) {
-        } else {
-        }
-
-
-        //md5(json_encode([$request->name, $request->email, $request->password, env('APP_KEY')]))
-        //dd();
-
         $request->validate([
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
@@ -41,11 +33,11 @@ class RegisterController extends Controller
         $encrypted_data = Crypt::encryptString(base64_encode(json_encode($request->only('password', 'email', 'name'))));
 
         Mail::to($request->email)->send(new RegistrationMail($request->name, $encrypted_data));
-        //dd();
-        return view('auth.register-sent-email', [
-            'email' => $request->email
+
+        return view('message', [
+            'title' => 'Email was sent to ' . $request->email . '!',
+            'message' => 'To complete the registration, you must confirm the mail!'
         ]);
-        //return redirect()->round('home');
     }
 
     public function confirm($data)
@@ -57,8 +49,10 @@ class RegisterController extends Controller
             'password' => Hash::make($decoded_data->password)
         ]);
         Auth::login($user);
-        return view('auth.register-confirm', [
-            'name' => $decoded_data->name
+
+        return view('message', [
+            'title' => 'Registration complete!',
+            'message' => 'Welcome ' . $decoded_data->name . '!',
         ]);
     }
 }
