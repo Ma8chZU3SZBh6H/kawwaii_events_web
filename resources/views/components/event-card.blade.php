@@ -11,7 +11,7 @@
     </div>
     <div class=" bg-white filter transition p-2">
         <p class="text-title font-medium text-2xl">{{$event->title}}</p>
-        <p class="text-text text-base">Starts in {{str_replace(" from now", "!", (new Carbon\Carbon($event->date))->diffForHumans() ) }}</p>
+        <p class="text-text text-base">Starts in {{str_replace(" from now", "!", (new Carbon\Carbon($event->starts))->diffForHumans() ) }}</p>
         <img class="w-full" src="{{Storage::url($event->cover)}}" alt="">
     </div>
 </div>

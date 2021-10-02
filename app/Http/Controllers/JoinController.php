@@ -6,6 +6,7 @@ use App\Mail\JoinEmail;
 use App\Models\Event;
 use App\Models\Joint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,7 +14,7 @@ class JoinController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('join_auth_store');
+        $this->middleware('auth')->only(['join_auth_store', 'join_auth_destroy', 'join_owner_destroy']);
     }
 
     public function join_guest_store($data)
@@ -77,7 +78,7 @@ class JoinController extends Controller
             ['event', '=', $event->id]
         ])->first();
 
-        //dd($joint);
+
 
         if ($joint != null) {
             return view('message', [
@@ -85,7 +86,42 @@ class JoinController extends Controller
                 'message' => ''
             ]);
         } else {
-            return redirect()->route('event', $event->id);
+            Joint::create([
+                'email' => Auth()->User()->email,
+                'event' => $event->id
+            ]);
+            return redirect()->route('event.select', $event->id);
+        }
+    }
+
+    public function join_auth_destroy(Event $event)
+    {
+        $joint = Joint::where([
+            ['email', '=', Auth()->User()->email],
+            ['event', '=', $event->id]
+        ])->first();
+
+        $joint->delete();
+
+        return redirect()->route('event.select', $event->id);
+    }
+
+    public function join_owner_destroy(Event $event, Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email', 'max:255']
+        ]);
+        if (Auth()->User()->id == $event->owner) {
+            $joint = Joint::where([
+                ['email', '=', $request->email],
+                ['event', '=', $event->id]
+            ])->first();
+
+            $joint->delete();
+
+            return redirect()->route('event.select', $event->id);
+        } else {
+            return response(403);
         }
     }
 }

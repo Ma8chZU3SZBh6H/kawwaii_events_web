@@ -32,10 +32,20 @@ class EventController extends Controller
                 ['event', '=', $event->id]
             ])->first();
 
-            return view('event', [
-                'event' => $event,
-                'joint' => $joint
-            ]);
+            if ($joint != null && Auth()->User()->id == $event->owner) {
+                $joined_people = Joint::where('event', '=', $event->id)->get();
+
+                return view('event', [
+                    'event' => $event,
+                    'joint' => $joint,
+                    'joined_people' => $joined_people
+                ]);
+            } else {
+                return view('event', [
+                    'event' => $event,
+                    'joint' => $joint
+                ]);
+            }
         } else {
             return view('event', [
                 'event' => $event,

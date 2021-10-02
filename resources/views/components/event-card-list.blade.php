@@ -4,5 +4,7 @@
     @endforeach
 </div>
 <div>
+    @if (($no_pages ?? false) == true)
     {{$events->links()}}
+    @endif
 </div>

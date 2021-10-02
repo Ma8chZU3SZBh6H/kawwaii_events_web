@@ -5,7 +5,7 @@ const nav_button = document.getElementById("nav_button");
 const nav_items = document.getElementById("nav_items");
 //max-h-0
 nav_button.addEventListener("click", () => {
-    switch_classes(nav_items, "max-h-0", "max-h-20");
+    switch_classes(nav_items, "max-h-0", "max-h-30");
 });
 
 const event_cards = document.getElementsByClassName("evento");

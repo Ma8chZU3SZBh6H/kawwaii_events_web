@@ -13,7 +13,7 @@ var nav_button = document.getElementById("nav_button");
 var nav_items = document.getElementById("nav_items"); //max-h-0
 
 nav_button.addEventListener("click", function () {
-  switch_classes(nav_items, "max-h-0", "max-h-20");
+  switch_classes(nav_items, "max-h-0", "max-h-30");
 });
 var event_cards = document.getElementsByClassName("evento");
 console.log(event_cards.length);

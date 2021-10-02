@@ -16,8 +16,8 @@
         </div>
     </div>
     <div class="flex flex-col gap-3">
-        @if ($events[0] == null)
-        <div class="text-text font-medium">You have no events added.</div>
+        @if (!isset($events))
+        <div class="text-text font-medium">No events found.</div>
         @else
         <x-event-card-list :events="$events" />
         @endif

@@ -13,9 +13,10 @@
             </div>
         </div>
         <div id="nav_items" class="md:flex justify-between items-center overflow-hidden transition-all md:max-h-full md:transition-none">
-            <div>
+            <div class="flex flex-col md:flex-row md:gap-3">
                 @auth()
                 <a class="text-text text-lg hover:underline" href="{{route('dashboard')}}">Dashboard</a>
+                <a class="text-text text-lg hover:underline" href="{{route('dashboard.joined')}}">Joined events</a>
                 @endauth
             </div>
             <div class="flex flex-col md:gap-3 md:flex-row">

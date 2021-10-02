@@ -41,6 +41,13 @@ Route::get('/register/{data}', [RegisterController::class, 'confirm'])->name('re
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/joined', [DashboardController::class, 'select'])->name('dashboard.joined');
+
+Route::post('/join/guest/{event}', [JoinController::class, 'join_guest_send'])->name('join.guest');
+Route::post('/join/event/{event}', [JoinController::class, 'join_auth_store'])->name('join.auth.accept');
+Route::post('/join/event/leave/{event}', [JoinController::class, 'join_auth_destroy'])->name('join.auth.leave');
+Route::post('/join/event/remove/{event}', [JoinController::class, 'join_auth_destroy'])->name('join.auth.remove');
+Route::get('/join/guest/accept/{data}', [JoinController::class, 'join_guest_store'])->name('join.guest.accept');
 
 Route::get('/event/add', [EventController::class, 'index'])->name('event');
 Route::post('/event/add', [EventController::class, 'store']);
@@ -48,7 +55,3 @@ Route::get('/event/edit/{event}', [EventController::class, 'edit_get'])->name('e
 Route::post('/event/edit/{event}', [EventController::class, 'edit_post']);
 Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
 Route::get('/event/{event}', [EventController::class, 'select'])->name('event.select');
-
-Route::post('/join/guest/{event}', [JoinController::class, 'join_guest_send'])->name('join.guest');
-Route::post('/join/event/{event}', [JoinController::class, 'join_auth_store'])->name('join.auth.accept');
-Route::get('/join/guest/accept/{data}', [JoinController::class, 'join_guest_store'])->name('join.guest.accept');
