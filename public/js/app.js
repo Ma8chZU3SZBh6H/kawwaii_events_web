@@ -10,11 +10,25 @@
 //require('./bootstrap');
 var nav_expanded = false;
 var nav_button = document.getElementById("nav_button");
-var nav_items = document.getElementById("nav_items"); //max-h-0
+var nav_items = document.getElementById("nav_items");
+var nav_sort_button = document.getElementById("sort_button");
 
-nav_button.addEventListener("click", function () {
-  switch_classes(nav_items, "max-h-0", "max-h-30");
-});
+if (nav_sort_button != null) {
+  nav_sort_button.addEventListener("change", function (e) {
+    var link_a = window.location.origin + (window.location.pathname == "/" ? "" : window.location.pathname);
+    var link_b = link_a.replace("/starts", "").replace("/title", "");
+    var link = "".concat(link_b, "/").concat(e.target.value);
+    console.log(link);
+    window.open(link, "_self");
+  });
+}
+
+if (nav_button != null) {
+  nav_button.addEventListener("click", function () {
+    switch_classes(nav_items, "max-h-0", "max-h-30");
+  });
+}
+
 var event_cards = document.getElementsByClassName("evento");
 console.log(event_cards.length);
 

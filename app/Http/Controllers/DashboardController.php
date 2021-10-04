@@ -14,16 +14,17 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($sort = 'starts')
     {
-        $events = Event::where('owner', Auth()->User()->id)->orderBy('created_at', 'desc')->paginate(10);
+        $events = Event::where('owner', Auth()->User()->id)->orderBy($sort, 'asc')->paginate(10);
 
         return view('dashboard', [
-            'events' => $events
+            'events' => $events,
+            'sort' => $sort
         ]);
     }
 
-    public function select()
+    public function select($sort = 'starts')
     {
         $joins = Joint::where('email', '=', Auth()->user()->email)->get();
 
@@ -34,11 +35,23 @@ class DashboardController extends Controller
 
             array_push($events, $event);
         }
+        // dd($events);
+        if ($sort == 'starts') {
+            usort($events, function ($a, $b) {
+                return strtotime($a->starts) - strtotime($b->starts);
+            });
+        } else {
+            usort($events, function ($a, $b) {
+                return $a->title < $b->title ? -1 : 1;
+            });
+        }
+        //dd($events);
 
 
         return view('dashboard', [
             'events' => $events,
-            'no_pages' => true
+            'no_pages' => true,
+            'sort' => $sort
         ]);
     }
 }

@@ -29,6 +29,7 @@ Route::get('/email', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/{sort?}', [HomeController::class, 'index'])->where('sort', "(title|starts)");
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
@@ -40,8 +41,11 @@ Route::get('/register/{data}', [RegisterController::class, 'confirm'])->name('re
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/joined', [DashboardController::class, 'select'])->name('dashboard.joined');
+Route::get('/dashboard/joined/{sort}', [DashboardController::class, 'select'])->where('sort', "(title|starts)");
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/{sort}', [DashboardController::class, 'index'])->where('sort', "(title|starts)");
+
 
 Route::post('/join/guest/{event}', [JoinController::class, 'join_guest_send'])->name('join.guest');
 Route::post('/join/event/{event}', [JoinController::class, 'join_auth_store'])->name('join.auth.accept');

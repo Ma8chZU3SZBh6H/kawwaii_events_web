@@ -9,9 +9,9 @@
         </div>
         <div class="flex ">
             <p class="text-text text-lg">Sort By:</p>
-            <select class="text-text cursor-pointer hover:underline" name="" id="">
-                <option value="">Views</option>
-                <option value="">Date</option>
+            <select id="sort_button" class="text-text cursor-pointer hover:underline" name="" id="">
+                <option {{ $sort == "title" ? 'selected' : ''}} value="title">Names</option>
+                <option {{ $sort == "starts" ? 'selected' : ''}} value="starts">Date</option>
             </select>
         </div>
     </div>

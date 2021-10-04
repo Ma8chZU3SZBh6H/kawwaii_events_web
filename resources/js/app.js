@@ -3,10 +3,23 @@
 let nav_expanded = false;
 const nav_button = document.getElementById("nav_button");
 const nav_items = document.getElementById("nav_items");
-//max-h-0
-nav_button.addEventListener("click", () => {
-    switch_classes(nav_items, "max-h-0", "max-h-30");
-});
+const nav_sort_button = document.getElementById("sort_button");
+if (nav_sort_button != null) {
+    nav_sort_button.addEventListener("change", (e) => {
+        const link_a =
+            window.location.origin +
+            (window.location.pathname == "/" ? "" : window.location.pathname);
+        const link_b = link_a.replace("/starts", "").replace("/title", "");
+        let link = `${link_b}/${e.target.value}`;
+        console.log(link);
+        window.open(link, "_self");
+    });
+}
+if (nav_button != null) {
+    nav_button.addEventListener("click", () => {
+        switch_classes(nav_items, "max-h-0", "max-h-30");
+    });
+}
 
 const event_cards = document.getElementsByClassName("evento");
 console.log(event_cards.length);
